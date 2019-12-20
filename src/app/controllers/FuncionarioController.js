@@ -74,7 +74,7 @@ class FuncionarioController {
     if (ContaBancariaExists) {
       return res
         .status(400)
-        .json({ error: "Número de Agência Bancaria já cadastrado." });
+        .json({ error: "Número de Conta Bancaria já cadastrado." });
     }
 
     const funcionario = await Funcionario.create(req.body);
