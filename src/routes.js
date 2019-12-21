@@ -83,4 +83,14 @@ routes.get("/proprietarios/:id", controllers.ProprietarioController.show);
 routes.put("/proprietarios/:id", controllers.ProprietarioController.update);
 routes.delete("/proprietarios/:id", controllers.ProprietarioController.destroy);
 
+/**
+ * Veiculo
+ */
+
+routes.get("/veiculos", controllers.VeiculoController.index);
+routes.post("/veiculos", controllers.VeiculoController.store);
+routes.get("/veiculos/:id", controllers.VeiculoController.show);
+routes.put("/veiculos/:id", controllers.VeiculoController.update);
+routes.delete("/veiculos/:id", controllers.VeiculoController.destroy);
+
 module.exports = routes;

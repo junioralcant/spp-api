@@ -30,16 +30,19 @@ const VeiculoSchema = new mongoose.Schema({
 
   placa: {
     type: String,
+    unique: true,
     required: true
   },
 
   chassi: {
     type: String,
+    unique: true,
     required: true
   },
 
   numeroDeSerie: {
     type: String,
+    unique: true,
     required: true
   },
 
