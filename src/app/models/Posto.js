@@ -23,6 +23,11 @@ const PostoSchema = new mongoose.Schema({
     required: true
   },
 
+  bairro: {
+    type: String,
+    required: true
+  },
+
   estado: {
     type: String,
     required: true

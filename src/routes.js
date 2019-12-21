@@ -23,4 +23,14 @@ routes.get("/encarregados/:id", controllers.EncarregadoController.show);
 routes.put("/encarregados/:id", controllers.EncarregadoController.update);
 routes.delete("/encarregados/:id", controllers.EncarregadoController.destroy);
 
+/**
+ * Hotel
+ */
+
+routes.get("/hotels", controllers.HotelController.index);
+routes.post("/hotels", controllers.HotelController.store);
+routes.get("/hotels/:id", controllers.HotelController.show);
+routes.put("/hotels/:id", controllers.HotelController.update);
+routes.delete("/hotels/:id", controllers.HotelController.destroy);
+
 module.exports = routes;

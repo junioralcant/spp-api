@@ -23,6 +23,11 @@ const HotelSchema = new mongoose.Schema({
     required: true
   },
 
+  bairro: {
+    type: String,
+    required: true
+  },
+
   cidade: {
     type: String,
     required: true
@@ -31,6 +36,11 @@ const HotelSchema = new mongoose.Schema({
   estado: {
     type: String,
     required: true
+  },
+
+  numeroCasa: {
+    type: String,
+    required: false
   },
 
   cep: {
@@ -46,6 +56,11 @@ const HotelSchema = new mongoose.Schema({
   whatsapp: {
     type: String,
     required: false
+  },
+
+  data: {
+    type: Date,
+    default: Date.now
   },
 
   createdAt: {

@@ -18,6 +18,11 @@ const ProprietarioSchema = new mongoose.Schema({
     required: true
   },
 
+  bairro: {
+    type: String,
+    required: true
+  },
+
   cidade: {
     type: String,
     required: true
