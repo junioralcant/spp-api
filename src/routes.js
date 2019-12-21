@@ -53,4 +53,14 @@ routes.get("/lojas/:id", controllers.LojaController.show);
 routes.put("/lojas/:id", controllers.LojaController.update);
 routes.delete("/lojas/:id", controllers.LojaController.destroy);
 
+/**
+ * Posto
+ */
+
+routes.get("/postos", controllers.PostoController.index);
+routes.post("/postos", controllers.PostoController.store);
+routes.get("/postos/:id", controllers.PostoController.show);
+routes.put("/postos/:id", controllers.PostoController.update);
+routes.delete("/postos/:id", controllers.PostoController.destroy);
+
 module.exports = routes;

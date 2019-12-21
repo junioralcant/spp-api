@@ -11,8 +11,7 @@ class LojaController {
     const lojas = await Loja.paginate(filters, {
       page: req.query.page || 1,
       limit: 15,
-      sort: "-createdAt",
-      populate: ["encarregado"]
+      sort: "-createdAt"
     });
 
     return res.json(lojas);

@@ -28,6 +28,11 @@ const PostoSchema = new mongoose.Schema({
     required: true
   },
 
+  numeroCasa: {
+    type: String,
+    required: true
+  },
+
   estado: {
     type: String,
     required: true
