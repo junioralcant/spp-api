@@ -33,4 +33,24 @@ routes.get("/hotels/:id", controllers.HotelController.show);
 routes.put("/hotels/:id", controllers.HotelController.update);
 routes.delete("/hotels/:id", controllers.HotelController.destroy);
 
+/**
+ * Linha
+ */
+
+routes.get("/linhas", controllers.LinhaController.index);
+routes.post("/linhas", controllers.LinhaController.store);
+routes.get("/linhas/:id", controllers.LinhaController.show);
+routes.put("/linhas/:id", controllers.LinhaController.update);
+routes.delete("/linhas/:id", controllers.LinhaController.destroy);
+
+/**
+ * Loja
+ */
+
+routes.get("/lojas", controllers.LojaController.index);
+routes.post("/lojas", controllers.LojaController.store);
+routes.get("/lojas/:id", controllers.LojaController.show);
+routes.put("/lojas/:id", controllers.LojaController.update);
+routes.delete("/lojas/:id", controllers.LojaController.destroy);
+
 module.exports = routes;

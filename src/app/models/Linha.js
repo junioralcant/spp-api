@@ -34,7 +34,7 @@ const LinhaSchema = new mongoose.Schema({
   },
 
   qtdTrabalhadoresManual: {
-    type: String,
+    type: Number,
     required: true
   },
 

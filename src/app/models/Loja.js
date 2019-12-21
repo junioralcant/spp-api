@@ -23,12 +23,22 @@ const LojaSchema = new mongoose.Schema({
     required: true
   },
 
+  bairro: {
+    type: String,
+    required: true
+  },
+
   cidade: {
     type: String,
     required: true
   },
 
   estado: {
+    type: String,
+    required: true
+  },
+
+  numeroCasa: {
     type: String,
     required: true
   },
@@ -46,6 +56,11 @@ const LojaSchema = new mongoose.Schema({
   whatsapp: {
     type: String,
     required: false
+  },
+
+  data: {
+    type: Date,
+    default: Date.now
   },
 
   createdAt: {

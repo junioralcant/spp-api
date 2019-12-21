@@ -4,6 +4,10 @@ class EncarregadoController {
   async index(req, res) {
     const filters = {};
 
+    if (req.query.nome) {
+      filters.nome = new RegExp(req.query.nome, "i");
+    }
+
     const encarregados = await Encarregado.paginate(filters, {
       page: req.query.page || 1,
       limit: 15,
