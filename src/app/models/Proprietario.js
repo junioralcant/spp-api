@@ -28,6 +28,11 @@ const ProprietarioSchema = new mongoose.Schema({
     required: true
   },
 
+  numeroCasa: {
+    type: String,
+    required: false
+  },
+
   estado: {
     type: String,
     required: true
