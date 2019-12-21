@@ -63,4 +63,14 @@ routes.get("/postos/:id", controllers.PostoController.show);
 routes.put("/postos/:id", controllers.PostoController.update);
 routes.delete("/postos/:id", controllers.PostoController.destroy);
 
+/**
+ * Restaurante
+ */
+
+routes.get("/restaurantes", controllers.RestauranteController.index);
+routes.post("/restaurantes", controllers.RestauranteController.store);
+routes.get("/restaurantes/:id", controllers.RestauranteController.show);
+routes.put("/restaurantes/:id", controllers.RestauranteController.update);
+routes.delete("/restaurantes/:id", controllers.RestauranteController.destroy);
+
 module.exports = routes;

@@ -9,7 +9,7 @@ const RestauranteSchema = new mongoose.Schema({
 
   proprietario: {
     type: String,
-    required: true
+    required: false
   },
 
   cnpj: {
@@ -21,6 +21,11 @@ const RestauranteSchema = new mongoose.Schema({
   endereco: {
     type: String,
     required: true
+  },
+
+  numeroCasa: {
+    type: String,
+    required: false
   },
 
   cidade: {

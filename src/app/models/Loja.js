@@ -9,7 +9,7 @@ const LojaSchema = new mongoose.Schema({
 
   proprietario: {
     type: String,
-    required: true
+    required: false
   },
 
   cnpj: {
@@ -40,7 +40,7 @@ const LojaSchema = new mongoose.Schema({
 
   numeroCasa: {
     type: String,
-    required: true
+    required: false
   },
 
   cep: {

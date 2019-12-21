@@ -9,7 +9,7 @@ const HotelSchema = new mongoose.Schema({
 
   proprietario: {
     type: String,
-    required: true
+    required: false
   },
 
   cnpj: {
