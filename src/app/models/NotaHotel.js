@@ -19,6 +19,11 @@ const NotaHotelSchema = new mongoose.Schema({
     required: false
   },
 
+  quantidade: {
+    type: Number,
+    required: false
+  },
+
   total: {
     type: Number,
     required: false
