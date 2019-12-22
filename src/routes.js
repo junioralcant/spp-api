@@ -113,4 +113,14 @@ routes.get("/notasLojas/:id", controllers.NotaLojaController.show);
 routes.put("/notasLojas/:id", controllers.NotaLojaController.update);
 routes.delete("/notasLojas/:id", controllers.NotaLojaController.destroy);
 
+/**
+ * NotaPosto
+ */
+
+routes.get("/notaspostos", controllers.NotaPostoController.index);
+routes.post("/notaspostos", controllers.NotaPostoController.store);
+routes.get("/notaspostos/:id", controllers.NotaPostoController.show);
+routes.put("/notaspostos/:id", controllers.NotaPostoController.update);
+routes.delete("/notaspostos/:id", controllers.NotaPostoController.destroy);
+
 module.exports = routes;
