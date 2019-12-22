@@ -30,7 +30,7 @@ const PostoSchema = new mongoose.Schema({
 
   numeroCasa: {
     type: String,
-    required: true
+    required: false
   },
 
   estado: {
