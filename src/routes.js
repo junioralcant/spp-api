@@ -123,4 +123,23 @@ routes.get("/notaspostos/:id", controllers.NotaPostoController.show);
 routes.put("/notaspostos/:id", controllers.NotaPostoController.update);
 routes.delete("/notaspostos/:id", controllers.NotaPostoController.destroy);
 
+/**
+ * NotaRestaurante
+ */
+
+routes.get("/notasrestaurantes", controllers.NotaRestauranteController.index);
+routes.post("/notasrestaurantes", controllers.NotaRestauranteController.store);
+routes.get(
+  "/notasrestaurantes/:id",
+  controllers.NotaRestauranteController.show
+);
+routes.put(
+  "/notasrestaurantes/:id",
+  controllers.NotaRestauranteController.update
+);
+routes.delete(
+  "/notasrestaurantes/:id",
+  controllers.NotaRestauranteController.destroy
+);
+
 module.exports = routes;
