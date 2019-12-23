@@ -5,6 +5,16 @@ const routes = express.Router();
 const controllers = require("./app/controllers/");
 
 /**
+ * User
+ */
+
+routes.get("/users", controllers.UserController.index);
+routes.post("/users", controllers.UserController.store);
+routes.get("/users/:id", controllers.UserController.show);
+routes.put("/users/:id", controllers.UserController.update);
+routes.delete("/users/:id", controllers.UserController.destroy);
+
+/**
  * Funcionario
  */
 routes.get("/funcionarios", controllers.FuncionarioController.index);
