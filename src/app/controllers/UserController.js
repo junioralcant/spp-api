@@ -7,7 +7,7 @@ const User = require("../models/User");
 class UserController {
   async index(req, res) {
     const user = await User.findById(req.userId);
-    if (user.provedor !== true) {
+    if (user.adm !== true) {
       return res.status(400).json({
         mensagem: "Você não tem permissão para ver usuários do sistema"
       });
@@ -41,9 +41,9 @@ class UserController {
   }
 
   async update(req, res) {
-    //validação
+    validação;
     const schema = object().shape({
-      name: string(),
+      nome: string(),
       email: string().email(),
       oldPassword: string().min(6),
       password: string()
@@ -76,7 +76,7 @@ class UserController {
       }
     }
 
-    if (oldPassword && !(await user.checkPassword(oldPassword))) {
+    if (oldPassword && !(await user.compareHash(oldPassword))) {
       return res.status(401).json({
         error: "A senha informada não corresponde com a antiga senha"
       });

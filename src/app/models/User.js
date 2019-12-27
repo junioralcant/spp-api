@@ -50,12 +50,13 @@ UserSchema.methods = {
 
 // methods staticus
 UserSchema.statics = {
-  //craia um token para o usuário
+  //cria um token para o usuário
   generateToken({ id }) {
     return jwt.sign({ id }, authConfig.secret, {
       expiresIn: authConfig.ttl // um período para que esse token inspire
     });
   }
 };
+
 UserSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model("User", UserSchema);
