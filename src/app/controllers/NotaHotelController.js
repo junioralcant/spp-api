@@ -1,3 +1,4 @@
+const { formatToTimeZone } = require("date-fns-timezone");
 const NotaHotel = require("../models/NotaHotel");
 
 class NotaHotelController {
@@ -6,6 +7,29 @@ class NotaHotelController {
 
     if (req.query.nome) {
       filters.nome = new RegExp(req.query.nome, "i");
+    }
+
+    if (req.query.data_min || req.query.data_max) {
+      filters.data = {};
+
+      const dataMinFormatada = formatToTimeZone(
+        req.query.data_min,
+        "YYYY-MM-DDT00:mm:ss.SSSZ", // formatação de data e hora
+        {
+          timeZone: "America/Sao_Paulo"
+        }
+      );
+
+      const dataMaxFormatada = formatToTimeZone(
+        req.query.data_max,
+        "YYYY-MM-DDT23:59:ss.SSSZ", // formatação de data e hora
+        {
+          timeZone: "America/Sao_Paulo"
+        }
+      );
+
+      filters.data.$gte = dataMinFormatada;
+      filters.data.$lte = dataMaxFormatada;
     }
 
     const notaHotels = await NotaHotel.paginate(filters, {

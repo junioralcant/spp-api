@@ -4,8 +4,12 @@ class VeiculoController {
   async index(req, res) {
     const filters = {};
 
-    if (req.query.nome) {
-      filters.nome = new RegExp(req.query.nome, "i");
+    if (req.query.modelo) {
+      filters.modelo = new RegExp(req.query.modelo, "i");
+    }
+
+    if (req.query.placa) {
+      filters.placa = new RegExp(req.query.placa, "i");
     }
 
     const veiculos = await Veiculo.paginate(filters, {
