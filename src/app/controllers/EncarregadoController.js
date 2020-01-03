@@ -1,4 +1,5 @@
 const Encarregado = require("../models/Encarregado");
+const Funcionario = require("../models/Funcionario");
 
 class EncarregadoController {
   async index(req, res) {
@@ -19,7 +20,11 @@ class EncarregadoController {
   }
 
   async store(req, res) {
-    const encarregado = await Encarregado.create(req.body);
+    const funcionario = await Funcionario.findById(req.body.funcionario);
+    const encarregado = await Encarregado.create({
+      ...req.body,
+      nome: funcionario.nome
+    });
 
     return res.json(encarregado);
   }
@@ -33,6 +38,7 @@ class EncarregadoController {
   }
 
   async update(req, res) {
+    const funcionario = await Funcionario.findById(req.body.funcionario);
     const encarregado = await Encarregado.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -40,6 +46,9 @@ class EncarregadoController {
         new: true
       }
     );
+
+    encarregado.nome = funcionario.nome;
+    await encarregado.save();
 
     return res.json(encarregado);
   }
