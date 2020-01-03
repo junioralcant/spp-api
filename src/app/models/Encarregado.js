@@ -8,6 +8,11 @@ const EncarregadoSchema = new mongoose.Schema({
     required: true
   },
 
+  nome: {
+    type: String,
+    required: true
+  },
+
   setor: {
     type: String,
     required: false

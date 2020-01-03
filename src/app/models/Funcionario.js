@@ -71,6 +71,11 @@ const FuncionarioSchema = new mongoose.Schema({
     required: true
   },
 
+  cep: {
+    type: String,
+    
+  },
+
   telefone: {
     type: String,
     required: true

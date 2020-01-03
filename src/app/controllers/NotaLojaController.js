@@ -1,5 +1,4 @@
 const { formatToTimeZone } = require("date-fns-timezone");
-
 const NotaLoja = require("../models/NotaLoja");
 
 class NotaLojaController {
