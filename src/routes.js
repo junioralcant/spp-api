@@ -7,7 +7,7 @@ const authMiddleware = require("./app/middleware/auth");
 
 routes.post("/sessions", controllers.SessionController.store);
 
-routes.use(authMiddleware);
+//routes.use(authMiddleware);
 /**
  * User
  */

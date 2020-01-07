@@ -58,11 +58,6 @@ const HotelSchema = new mongoose.Schema({
     required: false
   },
 
-  data: {
-    type: Date,
-    default: Date.now
-  },
-
   createdAt: {
     type: Date,
     default: Date.now

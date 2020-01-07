@@ -23,19 +23,19 @@ class VeiculoController {
   }
 
   async store(req, res) {
-    const PlacaExists = await Funcionario.findOne({ placa: req.body.placa }); // verifica se o RG informado já existe no bd
+    const PlacaExists = await Veiculo.findOne({ placa: req.body.placa }); // verifica se o RG informado já existe no bd
 
     if (PlacaExists) {
       return res.status(400).json({ error: "Número de Placa já cadastrado." });
     }
 
-    const ChassiExists = await Funcionario.findOne({ chassi: req.body.chassi }); // verifica se o Chassi informado já existe no bd
+    const ChassiExists = await Veiculo.findOne({ chassi: req.body.chassi }); // verifica se o Chassi informado já existe no bd
 
     if (ChassiExists) {
       return res.status(400).json({ error: "Número de Chassi já cadastrado." });
     }
 
-    const NumeroDeSerieExists = await Funcionario.findOne({
+    const NumeroDeSerieExists = await Veiculo.findOne({
       numeroDeSerie: req.body.numeroDeSerie
     }); // verifica se o RG informado já existe no bd
 
