@@ -30,6 +30,10 @@ const NotaHotelSchema = new mongoose.Schema({
     required: true
   },
 
+  tipoDePagamento: {
+    type: String
+  },
+
   valorUnitario: {
     type: Number,
     required: false
