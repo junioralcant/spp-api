@@ -12,6 +12,10 @@ class VeiculoController {
       filters.placa = new RegExp(req.query.placa, "i");
     }
 
+    if (req.query.chassi) {
+      filters.chassi = new RegExp(req.query.chassi, "i");
+    }
+
     const veiculos = await Veiculo.paginate(filters, {
       page: req.query.page || 1,
       limit: 15,

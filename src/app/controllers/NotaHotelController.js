@@ -1,5 +1,6 @@
 const { formatToTimeZone } = require("date-fns-timezone");
 const NotaHotel = require("../models/NotaHotel");
+const Hotel = require("../models/Hotel");
 
 class NotaHotelController {
   async index(req, res) {
@@ -16,7 +17,7 @@ class NotaHotelController {
         req.query.data_min,
         "YYYY-MM-DDT00:mm:ss.SSSZ", // formatação de data e hora
         {
-          timeZone: "America/Sao_Paulo"
+          timeZone: "Europe/Berlin"
         }
       );
 
@@ -24,7 +25,7 @@ class NotaHotelController {
         req.query.data_max,
         "YYYY-MM-DDT23:59:ss.SSSZ", // formatação de data e hora
         {
-          timeZone: "America/Sao_Paulo"
+          timeZone: "Europe/Berlin"
         }
       );
 
@@ -32,10 +33,12 @@ class NotaHotelController {
       filters.data.$lte = dataMaxFormatada;
     }
 
+    const { limit_page } = req.query;
+
     const notaHotels = await NotaHotel.paginate(filters, {
       page: req.query.page || 1,
-      limit: 15,
-      sort: "-createdAt",
+      limit: parseInt(req.query.limit_page) || 15,
+      sort: "-data",
       populate: ["hotel", "encarregado"]
     });
 
@@ -43,11 +46,13 @@ class NotaHotelController {
   }
 
   async store(req, res) {
+    const hotel = await Hotel.findById(req.body.hotel);
     const { valorUnitario, quantidade } = req.body;
 
     const notaHotel = await NotaHotel.create({
       ...req.body,
-      total: valorUnitario * quantidade
+      total: valorUnitario * quantidade,
+      nome: hotel.nome
     });
 
     return res.json(notaHotel);
@@ -63,7 +68,9 @@ class NotaHotelController {
   }
 
   async update(req, res) {
+    const hotel = await Hotel.findById(req.body.hotel);
     const { valorUnitario, quantidade } = req.body;
+    console.log(hotel);
 
     const notaHotel = await NotaHotel.findByIdAndUpdate(
       req.params.id,
@@ -74,6 +81,7 @@ class NotaHotelController {
     );
 
     notaHotel.total = valorUnitario * quantidade;
+    notaHotel.nome = hotel.nome;
     await notaHotel.save();
 
     return res.json(notaHotel);

@@ -38,7 +38,7 @@ class HotelController {
   }
 
   async destroy(req, res) {
-    await hotel.findByIdAndDelete(req.params.id);
+    await Hotel.findByIdAndDelete(req.params.id);
 
     return res.send();
   }
