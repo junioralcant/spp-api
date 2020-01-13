@@ -1,5 +1,6 @@
 const { formatToTimeZone } = require("date-fns-timezone");
 const NotaPosto = require("../models/NotaPosto");
+const Posto = require("../models/Posto");
 
 class NotaPostoController {
   async index(req, res) {
@@ -16,7 +17,7 @@ class NotaPostoController {
         req.query.data_min,
         "YYYY-MM-DDT00:mm:ss.SSSZ", // formatação de data e hora
         {
-          timeZone: "America/Sao_Paulo"
+          timeZone: "Europe/Berlin"
         }
       );
 
@@ -24,7 +25,7 @@ class NotaPostoController {
         req.query.data_max,
         "YYYY-MM-DDT23:59:ss.SSSZ", // formatação de data e hora
         {
-          timeZone: "America/Sao_Paulo"
+          timeZone: "Europe/Berlin"
         }
       );
 
@@ -43,11 +44,13 @@ class NotaPostoController {
   }
 
   async store(req, res) {
+    const posto = await Posto.findById(req.body.posto);
     const { valorUnitario, quantidade } = req.body;
 
     const notaPosto = await NotaPosto.create({
       ...req.body,
-      total: valorUnitario * quantidade
+      total: valorUnitario * quantidade,
+      nome: posto.nome
     });
 
     return res.json(notaPosto);
@@ -64,6 +67,7 @@ class NotaPostoController {
   }
 
   async update(req, res) {
+    const posto = await Posto.findById(req.body.posto);
     const { valorUnitario, quantidade } = req.body;
 
     const notaPosto = await NotaPosto.findByIdAndUpdate(
@@ -74,6 +78,7 @@ class NotaPostoController {
       }
     );
 
+    notaPosto.nome = posto.nome;
     notaPosto.total = valorUnitario * quantidade;
     await notaPosto.save();
 

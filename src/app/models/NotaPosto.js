@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 
 const NotaPostoSchema = new mongoose.Schema({
+  nome: {
+    type: String,
+    required: false
+  },
+
   posto: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Posto",
