@@ -33,8 +33,6 @@ class NotaHotelController {
       filters.data.$lte = dataMaxFormatada;
     }
 
-    const { limit_page } = req.query;
-
     const notaHotels = await NotaHotel.paginate(filters, {
       page: req.query.page || 1,
       limit: parseInt(req.query.limit_page) || 15,

@@ -1,5 +1,6 @@
 const { formatToTimeZone } = require("date-fns-timezone");
 const NotaLoja = require("../models/NotaLoja");
+const Loja = require("../models/Loja");
 
 class NotaLojaController {
   async index(req, res) {
@@ -16,7 +17,7 @@ class NotaLojaController {
         req.query.data_min,
         "YYYY-MM-DDT00:mm:ss.SSSZ", // formatação de data e hora
         {
-          timeZone: "America/Sao_Paulo"
+          timeZone: "Europe/Berlin"
         }
       );
 
@@ -24,7 +25,7 @@ class NotaLojaController {
         req.query.data_max,
         "YYYY-MM-DDT23:59:ss.SSSZ", // formatação de data e hora
         {
-          timeZone: "America/Sao_Paulo"
+          timeZone: "Europe/Berlin"
         }
       );
 
@@ -34,8 +35,8 @@ class NotaLojaController {
 
     const notaLojas = await NotaLoja.paginate(filters, {
       page: req.query.page || 1,
-      limit: 15,
-      sort: "-createdAt",
+      limit: parseInt(req.query.limit_page) || 15,
+      sort: "-data",
       populate: ["loja", "encarregado"]
     });
 
@@ -43,11 +44,13 @@ class NotaLojaController {
   }
 
   async store(req, res) {
+    const loja = await Loja.findById(req.body.loja);
     const { valorUnitario, quantidade } = req.body;
 
     const notaLoja = await NotaLoja.create({
       ...req.body,
-      total: valorUnitario * quantidade
+      total: valorUnitario * quantidade,
+      nome: loja.nome
     });
 
     return res.json(notaLoja);
@@ -63,12 +66,14 @@ class NotaLojaController {
   }
 
   async update(req, res) {
+    const loja = await Loja.findById(req.body.loja);
     const { valorUnitario, quantidade } = req.body;
 
     const notaLoja = await NotaLoja.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
 
+    notaLoja.nome = loja.nome;
     notaLoja.total = valorUnitario * quantidade;
     await notaLoja.save();
 
