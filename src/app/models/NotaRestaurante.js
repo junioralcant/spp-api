@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 
 const NotaRestauranteSchema = new mongoose.Schema({
+  nome: {
+    type: String,
+    required: true
+  },
+
   restaurante: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Restaurante",

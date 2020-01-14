@@ -1,5 +1,6 @@
 const { formatToTimeZone } = require("date-fns-timezone");
 const NotaRestaurante = require("../models/NotaRestaurante");
+const Restaurante = require("../models/Restaurante");
 
 class NotaRestauranteController {
   async index(req, res) {
@@ -16,7 +17,7 @@ class NotaRestauranteController {
         req.query.data_min,
         "YYYY-MM-DDT00:mm:ss.SSSZ", // formatação de data e hora
         {
-          timeZone: "America/Sao_Paulo"
+          timeZone: "Europe/Berlin"
         }
       );
 
@@ -24,7 +25,7 @@ class NotaRestauranteController {
         req.query.data_max,
         "YYYY-MM-DDT23:59:ss.SSSZ", // formatação de data e hora
         {
-          timeZone: "America/Sao_Paulo"
+          timeZone: "Europe/Berlin"
         }
       );
 
@@ -34,7 +35,7 @@ class NotaRestauranteController {
 
     const notaRestaurantes = await NotaRestaurante.paginate(filters, {
       page: req.query.page || 1,
-      limit: 15,
+      limit: parseInt(req.query.limit_page) || 15,
       sort: "-createdAt",
       populate: ["restaurante", "encarregado"]
     });
@@ -43,11 +44,13 @@ class NotaRestauranteController {
   }
 
   async store(req, res) {
+    const restaurante = await Restaurante.findById(req.body.restaurante);
     const { valorUnitario, quantidade } = req.body;
 
     const notaRestaurante = await NotaRestaurante.create({
       ...req.body,
-      total: valorUnitario * quantidade
+      total: valorUnitario * quantidade,
+      nome: restaurante.nome
     });
 
     return res.json(notaRestaurante);
@@ -62,6 +65,7 @@ class NotaRestauranteController {
   }
 
   async update(req, res) {
+    const restaurante = await Restaurante.findById(req.body.restaurante);
     const { valorUnitario, quantidade } = req.body;
 
     const notaRestaurante = await NotaRestaurante.findByIdAndUpdate(
@@ -73,6 +77,7 @@ class NotaRestauranteController {
     );
 
     notaRestaurante.total = valorUnitario * quantidade;
+    notaRestaurante.nome = restaurante.nome;
     await notaRestaurante.save();
 
     return res.json(notaRestaurante);
