@@ -58,6 +58,26 @@ const RestauranteSchema = new mongoose.Schema({
     required: false
   },
 
+  agenciaBancaria: {
+    type: String,
+    required: false
+  },
+
+  contaBancaria: {
+    type: String,
+    required: false
+  },
+
+  tipoConta: {
+    type: String,
+    required: false
+  },
+
+  banco: {
+    type: String,
+    required: false
+  },
+
   createdAt: {
     type: Date,
     default: Date.now
