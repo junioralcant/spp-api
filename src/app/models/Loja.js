@@ -53,6 +53,26 @@ const LojaSchema = new mongoose.Schema({
     required: true
   },
 
+  agenciaBancaria: {
+    type: String,
+    required: false
+  },
+
+  contaBancaria: {
+    type: String,
+    required: false
+  },
+
+  tipoConta: {
+    type: String,
+    required: false
+  },
+
+  banco: {
+    type: String,
+    required: false
+  },
+
   whatsapp: {
     type: String,
     required: false
