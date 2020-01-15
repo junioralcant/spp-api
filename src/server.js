@@ -10,7 +10,7 @@ class App {
   constructor() {
     this.express = express();
     this.express.use(cors());
-    this.isDev = process.env.NODE_ENV != "developement";
+    this.isDev = process.env.NODE_ENV != "production";
 
     this.database();
     this.middlewares();
