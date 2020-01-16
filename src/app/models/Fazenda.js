@@ -8,15 +8,25 @@ const FazendaSchema = new mongoose.Schema({
     required: true
   },
 
-  grupo: {
+  gastoCom: {
     type: String,
-    required: true
+    required: false
+  },
+
+  observacao: {
+    type: String,
+    required: false
   },
 
   quemComprou: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Funcionario",
     required: true
+  },
+
+  tipoDeCompra: {
+    type: String,
+    required: false
   },
 
   tipoDePagamento: {
@@ -27,6 +37,11 @@ const FazendaSchema = new mongoose.Schema({
   total: {
     type: String,
     required: true
+  },
+
+  data: {
+    type: Date,
+    required: false
   },
 
   createdAt: {
