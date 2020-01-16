@@ -45,11 +45,9 @@ class NotaLojaController {
 
   async store(req, res) {
     const loja = await Loja.findById(req.body.loja);
-    const { valorUnitario, quantidade } = req.body;
 
     const notaLoja = await NotaLoja.create({
       ...req.body,
-      total: valorUnitario * quantidade,
       nome: loja.nome
     });
 
@@ -67,14 +65,12 @@ class NotaLojaController {
 
   async update(req, res) {
     const loja = await Loja.findById(req.body.loja);
-    const { valorUnitario, quantidade } = req.body;
 
     const notaLoja = await NotaLoja.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
 
     notaLoja.nome = loja.nome;
-    notaLoja.total = valorUnitario * quantidade;
     await notaLoja.save();
 
     return res.json(notaLoja);
