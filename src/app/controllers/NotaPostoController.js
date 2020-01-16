@@ -36,7 +36,7 @@ class NotaPostoController {
     const notaPostos = await NotaPosto.paginate(filters, {
       page: req.query.page || 1,
       limit: parseInt(req.query.limit_page) || 15,
-      sort: "-createdAt",
+      sort: "-data",
       populate: ["posto", "veiculo", "motorista"]
     });
 
