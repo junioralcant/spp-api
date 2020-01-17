@@ -1,6 +1,7 @@
 const { formatToTimeZone } = require("date-fns-timezone");
 const NotaPosto = require("../models/NotaPosto");
 const Posto = require("../models/Posto");
+const Funcionario = require("../models/Funcionario");
 
 class NotaPostoController {
   async index(req, res) {
@@ -8,6 +9,10 @@ class NotaPostoController {
 
     if (req.query.nome) {
       filters.nome = new RegExp(req.query.nome, "i");
+    }
+
+    if (req.query.nome_motorista) {
+      filters.nomeMotorista = new RegExp(req.query.nomeMotorista, "i");
     }
 
     if (req.query.data_min || req.query.data_max) {
@@ -45,12 +50,14 @@ class NotaPostoController {
 
   async store(req, res) {
     const posto = await Posto.findById(req.body.posto);
+    const funcionario = await Funcionario.findById(req.body.motorista);
     const { valorUnitario, quantidade } = req.body;
 
     const notaPosto = await NotaPosto.create({
       ...req.body,
       total: valorUnitario * quantidade,
-      nome: posto.nome
+      nome: posto.nome,
+      nomeMotorista: funcionario.nome
     });
 
     return res.json(notaPosto);
@@ -67,6 +74,7 @@ class NotaPostoController {
   }
 
   async update(req, res) {
+    const funcionario = await Funcionario.findById(req.body.motorista);
     const posto = await Posto.findById(req.body.posto);
     const { valorUnitario, quantidade } = req.body;
 
@@ -80,6 +88,7 @@ class NotaPostoController {
 
     notaPosto.nome = posto.nome;
     notaPosto.total = valorUnitario * quantidade;
+    notaPosto.nomeMotorista = funcionario.nome;
     await notaPosto.save();
 
     return res.json(notaPosto);

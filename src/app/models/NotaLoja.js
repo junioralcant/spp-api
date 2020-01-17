@@ -6,16 +6,39 @@ const NotaLojaSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+
   loja: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Loja",
     required: true
   },
 
+  veiculo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Veiculo",
+    required: false
+  },
+
   encarregado: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Encarregado",
     required: true
+  },
+
+  observacao: {
+    type: String
+  },
+
+  tipoDeCompra: {
+    type: String
+  },
+
+  tipoDePagamento: {
+    type: String
+  },
+
+  numeroDeOrdem: {
+    type: String
   },
 
   total: {

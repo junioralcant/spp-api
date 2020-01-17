@@ -13,6 +13,10 @@ const NotaPostoSchema = new mongoose.Schema({
     required: true
   },
 
+  nomeMotorista: {
+    type: String
+  },
+
   motorista: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Funcionario",
@@ -22,12 +26,16 @@ const NotaPostoSchema = new mongoose.Schema({
   veiculo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Veiculo",
-    required: true
+    required: false
   },
 
   numeroDaOrdem: {
     type: String,
     required: false
+  },
+
+  tipoDePagamento: {
+    type: String
   },
 
   valorUnitario: {
