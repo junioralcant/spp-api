@@ -74,8 +74,8 @@ class NotaPostoController {
   }
 
   async update(req, res) {
-    const funcionario = await Funcionario.findById(req.body.motorista);
     const posto = await Posto.findById(req.body.posto);
+    const funcionario = await Funcionario.findById(req.body.motorista);
     const { valorUnitario, quantidade } = req.body;
 
     const notaPosto = await NotaPosto.findByIdAndUpdate(
