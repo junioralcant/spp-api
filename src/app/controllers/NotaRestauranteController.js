@@ -1,6 +1,7 @@
 const { formatToTimeZone } = require("date-fns-timezone");
 const NotaRestaurante = require("../models/NotaRestaurante");
 const Restaurante = require("../models/Restaurante");
+const Linha = require("../models/Linha");
 
 class NotaRestauranteController {
   async index(req, res) {
@@ -8,6 +9,10 @@ class NotaRestauranteController {
 
     if (req.query.nome) {
       filters.nome = new RegExp(req.query.nome, "i");
+    }
+
+    if (req.query.nome_linha) {
+      filters.nomeLinha = new RegExp(req.query.nome_linha, "i");
     }
 
     if (req.query.data_min || req.query.data_max) {
@@ -37,7 +42,7 @@ class NotaRestauranteController {
       page: req.query.page || 1,
       limit: parseInt(req.query.limit_page) || 15,
       sort: "-data",
-      populate: ["restaurante", "encarregado"]
+      populate: ["restaurante", "encarregado", "linha"]
     });
 
     return res.json(notaRestaurantes);
@@ -45,12 +50,14 @@ class NotaRestauranteController {
 
   async store(req, res) {
     const restaurante = await Restaurante.findById(req.body.restaurante);
+    const linha = await Linha.findById(req.body.linha);
     const { valorUnitario, quantidade } = req.body;
 
     const notaRestaurante = await NotaRestaurante.create({
       ...req.body,
       total: valorUnitario * quantidade,
-      nome: restaurante.nome
+      nome: restaurante.nome,
+      nomeLinha: linha.nome
     });
 
     return res.json(notaRestaurante);
@@ -59,13 +66,14 @@ class NotaRestauranteController {
   async show(req, res) {
     const notaRestaurante = await NotaRestaurante.findById(
       req.params.id
-    ).populate(["restaurante", "encarregado"]);
+    ).populate(["restaurante", "encarregado", "linha"]);
 
     return res.json(notaRestaurante);
   }
 
   async update(req, res) {
     const restaurante = await Restaurante.findById(req.body.restaurante);
+    const linha = await Linha.findById(req.body.linha);
     const { valorUnitario, quantidade } = req.body;
 
     const notaRestaurante = await NotaRestaurante.findByIdAndUpdate(
@@ -78,6 +86,7 @@ class NotaRestauranteController {
 
     notaRestaurante.total = valorUnitario * quantidade;
     notaRestaurante.nome = restaurante.nome;
+    notaRestaurante.nomeLinha = linha.nome;
     await notaRestaurante.save();
 
     return res.json(notaRestaurante);

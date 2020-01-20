@@ -7,6 +7,10 @@ const NotaRestauranteSchema = new mongoose.Schema({
     required: true
   },
 
+  nomeLinha: {
+    type: String
+  },
+
   restaurante: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Restaurante",
@@ -16,6 +20,12 @@ const NotaRestauranteSchema = new mongoose.Schema({
   encarregado: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Encarregado",
+    required: true
+  },
+
+  linha: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Linha",
     required: true
   },
 
