@@ -1,6 +1,7 @@
 const { formatToTimeZone } = require("date-fns-timezone");
 const NotaHotel = require("../models/NotaHotel");
 const Hotel = require("../models/Hotel");
+const Linha = require("../models/Linha");
 
 class NotaHotelController {
   async index(req, res) {
@@ -8,6 +9,10 @@ class NotaHotelController {
 
     if (req.query.nome) {
       filters.nome = new RegExp(req.query.nome, "i");
+    }
+
+    if (req.query.nome_linha) {
+      filters.nomeLinha = new RegExp(req.query.nome_linha, "i");
     }
 
     if (req.query.data_min || req.query.data_max) {
@@ -37,7 +42,7 @@ class NotaHotelController {
       page: req.query.page || 1,
       limit: parseInt(req.query.limit_page) || 15,
       sort: "-data",
-      populate: ["hotel", "encarregado"]
+      populate: ["hotel", "encarregado", "linha"]
     });
 
     return res.json(notaHotels);
@@ -45,12 +50,14 @@ class NotaHotelController {
 
   async store(req, res) {
     const hotel = await Hotel.findById(req.body.hotel);
+    const linha = await Linha.findById(req.body.linha);
     const { valorUnitario, quantidade } = req.body;
 
     const notaHotel = await NotaHotel.create({
       ...req.body,
       total: valorUnitario * quantidade,
-      nome: hotel.nome
+      nome: hotel.nome,
+      nomeLinha: linha.nome
     });
 
     return res.json(notaHotel);
@@ -59,7 +66,8 @@ class NotaHotelController {
   async show(req, res) {
     const notaHotel = await NotaHotel.findById(req.params.id).populate([
       "hotel",
-      "encarregado"
+      "encarregado",
+      "linha"
     ]);
 
     return res.json(notaHotel);
@@ -67,8 +75,8 @@ class NotaHotelController {
 
   async update(req, res) {
     const hotel = await Hotel.findById(req.body.hotel);
+    const linha = await Linha.findById(req.body.linha);
     const { valorUnitario, quantidade } = req.body;
-    console.log(hotel);
 
     const notaHotel = await NotaHotel.findByIdAndUpdate(
       req.params.id,
@@ -80,6 +88,7 @@ class NotaHotelController {
 
     notaHotel.total = valorUnitario * quantidade;
     notaHotel.nome = hotel.nome;
+    notaHotel.nomeLinha = linha.nome;
     await notaHotel.save();
 
     return res.json(notaHotel);

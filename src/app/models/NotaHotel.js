@@ -7,6 +7,11 @@ const NotaHotelSchema = new mongoose.Schema({
     required: false
   },
 
+  nomeLinha: {
+    type: String,
+    required: false
+  },
+
   hotel: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Hotel",
