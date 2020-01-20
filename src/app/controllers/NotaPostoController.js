@@ -2,6 +2,7 @@ const { formatToTimeZone } = require("date-fns-timezone");
 const NotaPosto = require("../models/NotaPosto");
 const Posto = require("../models/Posto");
 const Funcionario = require("../models/Funcionario");
+const Linha = require("../models/Linha");
 
 class NotaPostoController {
   async index(req, res) {
@@ -13,6 +14,10 @@ class NotaPostoController {
 
     if (req.query.nome_motorista) {
       filters.nomeMotorista = new RegExp(req.query.nome_motorista, "i");
+    }
+
+    if (req.query.nome_linha) {
+      filters.nomeLinha = new RegExp(req.query.nome_linha, "i");
     }
 
     if (req.query.data_min || req.query.data_max) {
@@ -42,7 +47,7 @@ class NotaPostoController {
       page: req.query.page || 1,
       limit: parseInt(req.query.limit_page) || 15,
       sort: "-data",
-      populate: ["posto", "veiculo", "motorista"]
+      populate: ["posto", "veiculo", "motorista", "linha"]
     });
 
     return res.json(notaPostos);
@@ -50,6 +55,7 @@ class NotaPostoController {
 
   async store(req, res) {
     const posto = await Posto.findById(req.body.posto);
+    const linha = await Linha.findById(req.body.linha);
     const funcionario = await Funcionario.findById(req.body.motorista);
     const { valorUnitario, quantidade } = req.body;
 
@@ -57,7 +63,8 @@ class NotaPostoController {
       ...req.body,
       total: valorUnitario * quantidade,
       nome: posto.nome,
-      nomeMotorista: funcionario.nome
+      nomeMotorista: funcionario.nome,
+      nomeLinha: linha.nome
     });
 
     return res.json(notaPosto);
@@ -67,7 +74,8 @@ class NotaPostoController {
     const notaPosto = await NotaPosto.findById(req.params.id).populate([
       "posto",
       "veiculo",
-      "motorista"
+      "motorista",
+      "linha"
     ]);
 
     return res.json(notaPosto);
@@ -75,6 +83,7 @@ class NotaPostoController {
 
   async update(req, res) {
     const posto = await Posto.findById(req.body.posto);
+    const linha = await Linha.findById(req.body.linha);
     const funcionario = await Funcionario.findById(req.body.motorista);
     const { valorUnitario, quantidade } = req.body;
 
@@ -89,6 +98,7 @@ class NotaPostoController {
     notaPosto.nome = posto.nome;
     notaPosto.total = valorUnitario * quantidade;
     notaPosto.nomeMotorista = funcionario.nome;
+    notaPosto.nomeLinha = linha.nome;
     await notaPosto.save();
 
     return res.json(notaPosto);

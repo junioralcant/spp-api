@@ -13,7 +13,17 @@ const NotaPostoSchema = new mongoose.Schema({
     required: true
   },
 
+  linha: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Linha",
+    required: true
+  },
+
   nomeMotorista: {
+    type: String
+  },
+
+  nomeLinha: {
     type: String
   },
 
