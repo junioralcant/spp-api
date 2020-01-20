@@ -13,6 +13,12 @@ const NotaHotelSchema = new mongoose.Schema({
     required: true
   },
 
+  linha: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Linha",
+    required: true
+  },
+
   encarregado: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Encarregado",

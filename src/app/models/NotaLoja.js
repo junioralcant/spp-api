@@ -7,6 +7,11 @@ const NotaLojaSchema = new mongoose.Schema({
     required: false
   },
 
+  nomeLinha: {
+    type: String,
+    required: false
+  },
+
   loja: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Loja",
@@ -22,6 +27,12 @@ const NotaLojaSchema = new mongoose.Schema({
   encarregado: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Encarregado",
+    required: true
+  },
+
+  linha: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Linha",
     required: true
   },
 

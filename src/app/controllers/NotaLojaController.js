@@ -1,6 +1,7 @@
 const { formatToTimeZone } = require("date-fns-timezone");
 const NotaLoja = require("../models/NotaLoja");
 const Loja = require("../models/Loja");
+const Linha = require("../models/Linha");
 
 class NotaLojaController {
   async index(req, res) {
@@ -8,6 +9,10 @@ class NotaLojaController {
 
     if (req.query.nome) {
       filters.nome = new RegExp(req.query.nome, "i");
+    }
+
+    if (req.query.nome_linha) {
+      filters.nomeLinha = new RegExp(req.query.nome_linha, "i");
     }
 
     if (req.query.data_min || req.query.data_max) {
@@ -37,7 +42,7 @@ class NotaLojaController {
       page: req.query.page || 1,
       limit: parseInt(req.query.limit_page) || 15,
       sort: "-data",
-      populate: ["loja", "encarregado"]
+      populate: ["loja", "encarregado", "veiculo", "linha"]
     });
 
     return res.json(notaLojas);
@@ -45,10 +50,12 @@ class NotaLojaController {
 
   async store(req, res) {
     const loja = await Loja.findById(req.body.loja);
+    const linha = await Linha.findById(req.body.linha);
 
     const notaLoja = await NotaLoja.create({
       ...req.body,
-      nome: loja.nome
+      nome: loja.nome,
+      nomeLinha: linha.nome
     });
 
     return res.json(notaLoja);
@@ -57,7 +64,9 @@ class NotaLojaController {
   async show(req, res) {
     const notaLoja = await NotaLoja.findById(req.params.id).populate([
       "loja",
-      "encarregado"
+      "encarregado",
+      "veiculo",
+      "linha"
     ]);
 
     return res.json(notaLoja);
@@ -65,12 +74,14 @@ class NotaLojaController {
 
   async update(req, res) {
     const loja = await Loja.findById(req.body.loja);
+    const linha = await Linha.findById(req.body.linha);
 
     const notaLoja = await NotaLoja.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     });
 
     notaLoja.nome = loja.nome;
+    notaLoja.nomeLinha = linha.nome;
     await notaLoja.save();
 
     return res.json(notaLoja);
