@@ -12,7 +12,7 @@ class NotaPostoController {
     }
 
     if (req.query.nome_motorista) {
-      filters.nomeMotorista = new RegExp(req.query.nomeMotorista, "i");
+      filters.nomeMotorista = new RegExp(req.query.nome_motorista, "i");
     }
 
     if (req.query.data_min || req.query.data_max) {
