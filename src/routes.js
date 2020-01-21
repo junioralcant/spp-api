@@ -156,4 +156,14 @@ routes.delete(
   controllers.NotaRestauranteController.destroy
 );
 
+/**
+ * NotaPosto
+ */
+
+routes.get("/notasfazendas", controllers.NotaFazendaController.index);
+routes.post("/notasfazendas", controllers.NotaFazendaController.store);
+routes.get("/notasfazendas/:id", controllers.NotaFazendaController.show);
+routes.put("/notasfazendas/:id", controllers.NotaFazendaController.update);
+routes.delete("/notasfazendas/:id", controllers.NotaFazendaController.destroy);
+
 module.exports = routes;
