@@ -8,6 +8,10 @@ class RestauranteController {
       filters.nome = new RegExp(req.query.nome, "i");
     }
 
+    if (req.query.cnpj_cpf) {
+      filters.cnpj = new RegExp(req.query.cnpj_cpf, "i");
+    }
+
     const restaurantes = await Restaurante.paginate(filters, {
       page: req.query.page || 1,
       limit: 15,

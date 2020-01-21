@@ -8,6 +8,10 @@ class ProprietarioController {
       filters.nome = new RegExp(req.query.nome, "i");
     }
 
+    if (req.query.cnpj_cpf) {
+      filters.cnpj = new RegExp(req.query.cnpj_cpf, "i");
+    }
+
     const proprietarios = await Proprietario.paginate(filters, {
       page: req.query.page || 1,
       limit: 15,
