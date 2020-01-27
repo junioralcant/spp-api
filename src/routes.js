@@ -166,4 +166,20 @@ routes.get("/notasfazendas/:id", controllers.NotaFazendaController.show);
 routes.put("/notasfazendas/:id", controllers.NotaFazendaController.update);
 routes.delete("/notasfazendas/:id", controllers.NotaFazendaController.destroy);
 
+/**
+ * NotaSafraArroz
+ */
+
+routes.get("/notassafraarrozs", controllers.NotaSafraArrozController.index);
+routes.post("/notassafraarrozs", controllers.NotaSafraArrozController.store);
+routes.get("/notassafraarrozs/:id", controllers.NotaSafraArrozController.show);
+routes.put(
+  "/notassafraarrozs/:id",
+  controllers.NotaSafraArrozController.update
+);
+routes.delete(
+  "/notassafraarrozs/:id",
+  controllers.NotaSafraArrozController.destroy
+);
+
 module.exports = routes;
