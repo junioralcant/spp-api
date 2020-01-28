@@ -207,4 +207,9 @@ routes.delete(
   controllers.NotaDespesaDiversaController.destroy
 );
 
+/**
+ * Caixa
+ */
+
+routes.get("/caixas", controllers.CaixaController.index);
 module.exports = routes;
