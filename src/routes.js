@@ -182,4 +182,29 @@ routes.delete(
   controllers.NotaSafraArrozController.destroy
 );
 
+/**
+ * NotaDespesaDiversa
+ */
+
+routes.get(
+  "/notasdespesasdiversas",
+  controllers.NotaDespesaDiversaController.index
+);
+routes.post(
+  "/notasdespesasdiversas",
+  controllers.NotaDespesaDiversaController.store
+);
+routes.get(
+  "/notasdespesasdiversas/:id",
+  controllers.NotaDespesaDiversaController.show
+);
+routes.put(
+  "/notasdespesasdiversas/:id",
+  controllers.NotaDespesaDiversaController.update
+);
+routes.delete(
+  "/notasdespesasdiversas/:id",
+  controllers.NotaDespesaDiversaController.destroy
+);
+
 module.exports = routes;
