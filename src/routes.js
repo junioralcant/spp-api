@@ -252,6 +252,22 @@ routes.delete(
 );
 
 /**
+ * NotaDespesaSpp
+ */
+
+routes.get("/notasdespesasspps", controllers.NotaDespesaSppController.index);
+routes.post("/notasdespesasspps", controllers.NotaDespesaSppController.store);
+routes.get("/notasdespesasspps/:id", controllers.NotaDespesaSppController.show);
+routes.put(
+  "/notasdespesasspps/:id",
+  controllers.NotaDespesaSppController.update
+);
+routes.delete(
+  "/notasdespesasspps/:id",
+  controllers.NotaDespesaSppController.destroy
+);
+
+/**
  * Caixa
  */
 
