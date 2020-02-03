@@ -208,6 +208,25 @@ routes.delete(
 );
 
 /**
+ * NotaDespesaRoco
+ */
+
+routes.get("/notasdespesasrocos", controllers.NotaDespesaRocoController.index);
+routes.post("/notasdespesasrocos", controllers.NotaDespesaRocoController.store);
+routes.get(
+  "/notasdespesasrocos/:id",
+  controllers.NotaDespesaRocoController.show
+);
+routes.put(
+  "/notasdespesasrocos/:id",
+  controllers.NotaDespesaRocoController.update
+);
+routes.delete(
+  "/notasdespesasrocos/:id",
+  controllers.NotaDespesaRocoController.destroy
+);
+
+/**
  * Caixa
  */
 
