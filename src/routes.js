@@ -211,6 +211,31 @@ routes.delete(
  * NotaDespesaRoco
  */
 
+routes.get(
+  "/notasdespesasfuncionarios",
+  controllers.NotaDespesaFuncionarioController.index
+);
+routes.post(
+  "/notasdespesasfuncionarios",
+  controllers.NotaDespesaFuncionarioController.store
+);
+routes.get(
+  "/notasdespesasfuncionarios/:id",
+  controllers.NotaDespesaFuncionarioController.show
+);
+routes.put(
+  "/notasdespesasfuncionarios/:id",
+  controllers.NotaDespesaFuncionarioController.update
+);
+routes.delete(
+  "/notasdespesasfuncionarios/:id",
+  controllers.NotaDespesaFuncionarioController.destroy
+);
+
+/**
+ * NotaDespesaFuncionario
+ */
+
 routes.get("/notasdespesasrocos", controllers.NotaDespesaRocoController.index);
 routes.post("/notasdespesasrocos", controllers.NotaDespesaRocoController.store);
 routes.get(
