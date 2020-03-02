@@ -272,4 +272,29 @@ routes.delete(
  */
 
 routes.get("/caixas", controllers.CaixaController.index);
+
+/**
+ * AdiantamentoFuncionario
+ */
+
+routes.get(
+  "/adiantamentosfuncionarios",
+  controllers.AdiantamentoFuncionarioController.index
+);
+routes.post(
+  "/adiantamentosfuncionarios",
+  controllers.AdiantamentoFuncionarioController.store
+);
+routes.get(
+  "/adiantamentosfuncionarios/:id",
+  controllers.AdiantamentoFuncionarioController.show
+);
+routes.put(
+  "/adiantamentosfuncionarios/:id",
+  controllers.AdiantamentoFuncionarioController.update
+);
+routes.delete(
+  "/adiantamentosfuncionarios/:id",
+  controllers.AdiantamentoFuncionarioController.destroy
+);
 module.exports = routes;
