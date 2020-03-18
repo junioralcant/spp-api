@@ -12,7 +12,7 @@ class LinhaController {
       page: req.query.page || 1,
       limit: 15,
       sort: "-createdAt",
-      populate: ["encarregado"]
+      populate: ["funcionario"]
     });
 
     return res.json(linhas);
@@ -25,7 +25,7 @@ class LinhaController {
   }
 
   async show(req, res) {
-    const linha = await Linha.findById(req.params.id).populate("encarregado");
+    const linha = await Linha.findById(req.params.id).populate("funcionario");
 
     return res.json(linha);
   }

@@ -17,9 +17,9 @@ const LinhaSchema = new mongoose.Schema({
     required: true
   },
 
-  encarregado: {
+  funcionario: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Encarregado",
+    ref: "Funcionario",
     required: true
   },
 
