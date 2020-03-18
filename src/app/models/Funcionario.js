@@ -4,36 +4,32 @@ const mongoosePaginate = require("mongoose-paginate");
 const FuncionarioSchema = new mongoose.Schema({
   nome: {
     type: String,
-    required: true
+    required: false
   },
 
   rg: {
     type: String,
-    required: true,
-    unique: true
+    required: false
   },
 
   cpf: {
     type: String,
-    required: true,
-    unique: true
+    required: false
   },
 
   cnh: {
     type: String,
-    required: false,
-    unique: true
+    required: false
   },
 
   pis: {
     type: String,
-    required: false,
-    unique: true
+    required: false
   },
 
   dataNascimento: {
     type: Date,
-    required: true
+    required: false
   },
 
   dataAdmissao: {
@@ -48,17 +44,17 @@ const FuncionarioSchema = new mongoose.Schema({
 
   endereco: {
     type: String,
-    required: true
+    required: false
   },
 
   cidade: {
     type: String,
-    required: true
+    required: false
   },
 
   bairro: {
     type: String,
-    required: true
+    required: false
   },
 
   numeroCasa: {
@@ -68,17 +64,16 @@ const FuncionarioSchema = new mongoose.Schema({
 
   estado: {
     type: String,
-    required: true
+    required: false
   },
 
   cep: {
-    type: String,
-    
+    type: String
   },
 
   telefone: {
     type: String,
-    required: true
+    required: false
   },
 
   whatsapp: {
