@@ -7,6 +7,7 @@ const NotaRestaurante = require("../models/NotaRestaurante");
 const NotaSafraArroz = require("../models/NotaSafraArroz");
 const NotaFazenda = require("../models/NotaFazenda");
 const NotaDespesaDiversa = require("../models/NotaDespesaDiversa");
+const Adiantamento = require("../models/Adiantamento");
 
 class CaixaController {
   async index(req, res) {
@@ -103,6 +104,19 @@ class CaixaController {
     despesas.map(despesa => {
       caixa.push(despesa);
     });
+
+    //ADIANTAMENTO
+    const adiantamento = await Adiantamento.find({
+      data: filterDate,
+      nomeFuncionario: gastoCom,
+      tipoDePagamento: tipoPagamento
+    }).populate(["linha", "funcionario"]);
+
+    adiantamento.map(adianta => {
+      caixa.push(adianta);
+    });
+
+    console.log(adiantamento);
 
     return res.json(caixa);
   }
