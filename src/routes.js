@@ -268,6 +268,16 @@ routes.delete(
 );
 
 /**
+ * Adiantamento
+ */
+
+routes.get("/adiantamentos", controllers.AdiantamentoController.index);
+routes.post("/adiantamentos", controllers.AdiantamentoController.store);
+routes.get("/adiantamentos/:id", controllers.AdiantamentoController.show);
+routes.put("/adiantamentos/:id", controllers.AdiantamentoController.update);
+routes.delete("/adiantamentos/:id", controllers.AdiantamentoController.destroy);
+
+/**
  * Caixa
  */
 
