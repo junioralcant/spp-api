@@ -110,13 +110,11 @@ class CaixaController {
       data: filterDate,
       nomeFuncionario: gastoCom,
       tipoDePagamento: tipoPagamento
-    }).populate(["linha", "funcionario"]);
+    }).populate(["funcionario"]);
 
     adiantamento.map(adianta => {
       caixa.push(adianta);
     });
-
-    console.log(adiantamento);
 
     return res.json(caixa);
   }

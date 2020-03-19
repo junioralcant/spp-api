@@ -9,8 +9,7 @@ const AdiantamentoSchema = new mongoose.Schema({
   },
 
   linha: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Linha",
+    type: String,
     required: false
   },
 

@@ -1,7 +1,6 @@
 const { formatToTimeZone } = require("date-fns-timezone");
 const Adiantamento = require("../models/Adiantamento");
 const Funcionario = require("../models/Funcionario");
-const Linha = require("../models/Linha");
 
 class AdiantamentoController {
   async index(req, res) {
@@ -38,7 +37,7 @@ class AdiantamentoController {
       page: req.query.page || 1,
       limit: parseInt(req.query.limit_page) || 15,
       sort: "-data",
-      populate: ["funcionario", "linha"]
+      populate: ["funcionario"]
     });
 
     return res.json(adiantamentos);
@@ -57,8 +56,7 @@ class AdiantamentoController {
 
   async show(req, res) {
     const adiantamento = await Adiantamento.findById(req.params.id).populate([
-      "funcionario",
-      "linha"
+      "funcionario"
     ]);
 
     return res.json(adiantamento);
