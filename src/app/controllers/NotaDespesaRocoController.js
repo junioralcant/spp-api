@@ -12,7 +12,7 @@ class NotaDespesaRocoController {
     }
 
     if (req.query.nome_loja) {
-      filters.nomeLoja = new RegExp(req.query.nome_loja, "i");
+      filters.nome = new RegExp(req.query.nome_loja, "i");
     }
 
     if (req.query.gastocom) {
@@ -59,7 +59,7 @@ class NotaDespesaRocoController {
     const notaDespesaRoco = await NotaDespesaRoco.create({
       ...req.body,
       nomeQuemComprou: funcionario.nome,
-      nomeLoja: loja.nome
+      nome: loja.nome
     });
 
     return res.json(notaDespesaRoco);
@@ -86,7 +86,7 @@ class NotaDespesaRocoController {
     );
 
     notaDespesaRoco.nomeQuemComprou = funcionario.nome;
-    notaDespesaRoco.nomeLoja = loja.nome;
+    notaDespesaRoco.nome = loja.nome;
     await notaDespesaRoco.save();
 
     return res.json(notaDespesaRoco);

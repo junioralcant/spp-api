@@ -6,13 +6,14 @@ const NotaFazendaSchema = new mongoose.Schema({
     type: String
   },
 
-  nomeLoja: {
+  // Nome loja
+  nome: {
     type: String
   },
 
   gastoCom: {
     type: String,
-    required: true
+    required: false
   },
 
   loja: {

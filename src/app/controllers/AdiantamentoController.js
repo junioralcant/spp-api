@@ -7,7 +7,7 @@ class AdiantamentoController {
     const filters = {};
 
     if (req.query.nome_funcionario) {
-      filters.nomeFuncionario = new RegExp(req.query.nome_funcionario, "i");
+      filters.nome = new RegExp(req.query.nome_funcionario, "i");
     }
 
     if (req.query.data_min || req.query.data_max) {
@@ -48,7 +48,7 @@ class AdiantamentoController {
 
     const adiantamento = await Adiantamento.create({
       ...req.body,
-      nomeFuncionario: funcionario.nome
+      nome: funcionario.nome
     });
 
     return res.json(adiantamento);
@@ -73,7 +73,7 @@ class AdiantamentoController {
       }
     );
 
-    adiantamento.nomeFuncionario = funcionario.nome;
+    adiantamento.nome = funcionario.nome;
     await adiantamento.save();
 
     return res.json(adiantamento);

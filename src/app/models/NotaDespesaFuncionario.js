@@ -6,7 +6,8 @@ const NotaDespesaFuncionarioSchema = new mongoose.Schema({
     type: String
   },
 
-  nomeLoja: {
+  // Nome loja
+  nome: {
     type: String
   },
 

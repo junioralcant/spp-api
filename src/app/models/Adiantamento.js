@@ -13,7 +13,7 @@ const AdiantamentoSchema = new mongoose.Schema({
     required: false
   },
 
-  nomeFuncionario: {
+  nome: {
     type: String,
     required: false
   },

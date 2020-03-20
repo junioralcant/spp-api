@@ -6,19 +6,20 @@ const NotaSafraArrozSchema = new mongoose.Schema({
     type: String
   },
 
-  nomeLoja: {
+  // Nome loja
+  nome: {
     type: String
-  },
-
-  gastoCom: {
-    type: String,
-    required: true
   },
 
   loja: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Loja",
     required: true
+  },
+
+  gastoCom: {
+    type: String,
+    required: false
   },
 
   quemComprou: {

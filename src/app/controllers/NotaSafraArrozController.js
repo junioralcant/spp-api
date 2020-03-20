@@ -12,7 +12,7 @@ class NotaSafraArrozController {
     }
 
     if (req.query.nome_loja) {
-      filters.nomeLoja = new RegExp(req.query.nome_loja, "i");
+      filters.nome = new RegExp(req.query.nome_loja, "i");
     }
 
     if (req.query.gastocom) {
@@ -59,7 +59,7 @@ class NotaSafraArrozController {
     const notaSafraArroz = await NotaSafraArroz.create({
       ...req.body,
       nomeQuemComprou: funcionario.nome,
-      nomeLoja: loja.nome
+      nome: loja.nome
     });
 
     return res.json(notaSafraArroz);
@@ -86,7 +86,7 @@ class NotaSafraArrozController {
     );
 
     notaSafraArroz.nomeQuemComprou = funcionario.nome;
-    notaSafraArroz.nomeLoja = loja.nome;
+    notaSafraArroz.nome = loja.nome;
     await notaSafraArroz.save();
 
     return res.json(notaSafraArroz);
