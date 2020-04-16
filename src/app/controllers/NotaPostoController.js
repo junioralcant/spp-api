@@ -20,6 +20,10 @@ class NotaPostoController {
       filters.nomeLinha = new RegExp(req.query.nome_linha, "i");
     }
 
+    if (req.query.nome_nota) {
+      filters.nomeNota = new RegExp(req.query.nome_nota, "i");
+    }
+
     if (req.query.data_min || req.query.data_max) {
       filters.data = {};
 

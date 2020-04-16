@@ -7,6 +7,9 @@ const NotaRestaurante = require("../models/NotaRestaurante");
 const NotaSafraArroz = require("../models/NotaSafraArroz");
 const NotaFazenda = require("../models/NotaFazenda");
 const NotaDespesaDiversa = require("../models/NotaDespesaDiversa");
+const NotaDespesaFuncionario = require("../models/NotaDespesaFuncionario");
+const NotaDespesaRoco = require("../models/NotaDespesaRoco");
+const NotaDespesaSpp = require("../models/NotaDespesaSpp");
 const Adiantamento = require("../models/Adiantamento");
 
 class CaixaController {
@@ -26,13 +29,15 @@ class CaixaController {
 
     const gastoCom = new RegExp(req.query.gasto_com, "i");
     const tipoPagamento = new RegExp(req.query.tipo_pagamento, "i");
+    const nomeNotaFiltro = new RegExp(req.query.nome_nota, "i");
     const caixa = [];
 
     //LOJA
     const lojas = await NotaLoja.find({
       data: filterDate,
       nome: gastoCom,
-      tipoDePagamento: tipoPagamento
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
     }).populate(["loja", "encarregado", "veiculo", "linha"]);
 
     lojas.map(loja => {
@@ -43,7 +48,8 @@ class CaixaController {
     const postos = await NotaPosto.find({
       data: filterDate,
       nome: gastoCom,
-      tipoDePagamento: tipoPagamento
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
     }).populate(["posto", "veiculo", "motorista", "linha"]);
 
     postos.map(posto => {
@@ -54,7 +60,8 @@ class CaixaController {
     const hotels = await NotaHotel.find({
       data: filterDate,
       nome: gastoCom,
-      tipoDePagamento: tipoPagamento
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
     }).populate(["hotel", "encarregado", "linha"]);
 
     hotels.map(hotel => {
@@ -65,7 +72,8 @@ class CaixaController {
     const restaurantes = await NotaRestaurante.find({
       data: filterDate,
       nome: gastoCom,
-      tipoDePagamento: tipoPagamento
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
     }).populate(["restaurante", "encarregado", "linha"]);
 
     restaurantes.map(restaurante => {
@@ -75,8 +83,9 @@ class CaixaController {
     //SAFRA ARROZ
     const safras = await NotaSafraArroz.find({
       data: filterDate,
-      nomeLoja: gastoCom,
-      tipoDePagamento: tipoPagamento
+      nome: gastoCom,
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
     }).populate(["loja", "quemComprou"]);
 
     safras.map(safra => {
@@ -86,30 +95,69 @@ class CaixaController {
     //FAZENDA
     const fazendas = await NotaFazenda.find({
       data: filterDate,
-      nomeLoja: gastoCom,
-      tipoDePagamento: tipoPagamento
+      nome: gastoCom,
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
     }).populate(["loja", "quemComprou"]);
 
     fazendas.map(fazenda => {
       caixa.push(fazenda);
     });
 
+    //NOTA DESPESA FUNCIONARIO
+    const notaDespesaFuncionario = await NotaDespesaFuncionario.find({
+      data: filterDate,
+      nome: gastoCom,
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
+    }).populate(["loja", "funcionario"]);
+
+    notaDespesaFuncionario.map(funcionario => {
+      caixa.push(funcionario);
+    });
+
+    //NOTA DESPESA ROCO
+    const notaDespesaRoco = await NotaDespesaRoco.find({
+      data: filterDate,
+      nome: gastoCom,
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
+    }).populate(["loja", "quemComprou"]);
+
+    notaDespesaRoco.map(roco => {
+      caixa.push(roco);
+    });
+
     //DEPESAS DIVERSAS
     const despesas = await NotaDespesaDiversa.find({
       data: filterDate,
-      nomeLoja: gastoCom,
-      tipoDePagamento: tipoPagamento
+      nome: gastoCom,
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
     }).populate(["loja", "quemComprou"]);
 
     despesas.map(despesa => {
       caixa.push(despesa);
     });
 
+    //DEPESAS SPP
+    const despesasSpp = await NotaDespesaSpp.find({
+      data: filterDate,
+      nome: gastoCom,
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
+    }).populate(["loja", "quemComprou"]);
+
+    despesasSpp.map(spp => {
+      caixa.push(spp);
+    });
+
     //ADIANTAMENTO
     const adiantamento = await Adiantamento.find({
       data: filterDate,
-      nomeFuncionario: gastoCom,
-      tipoDePagamento: tipoPagamento
+      nome: gastoCom,
+      tipoDePagamento: tipoPagamento,
+      nomeNota: nomeNotaFiltro
     }).populate(["funcionario"]);
 
     adiantamento.map(adianta => {

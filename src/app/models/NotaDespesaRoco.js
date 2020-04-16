@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 
 const NotaDespesaRocoSchema = new mongoose.Schema({
+  nomeNota: {
+    type: String,
+    required: true,
+    default: "Despesa Roço"
+  },
+
   nomeQuemComprou: {
     type: String
   },
@@ -13,7 +19,7 @@ const NotaDespesaRocoSchema = new mongoose.Schema({
 
   gastoCom: {
     type: String,
-    required: true
+    required: false
   },
 
   loja: {

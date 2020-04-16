@@ -19,6 +19,10 @@ class NotaDespesaRocoController {
       filters.gastoCom = new RegExp(req.query.gastocom, "i");
     }
 
+    if (req.query.nome_nota) {
+      filters.nomeNota = new RegExp(req.query.nome_nota, "i");
+    }
+
     if (req.query.data_min || req.query.data_max) {
       filters.data = {};
 

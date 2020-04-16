@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 
 const AdiantamentoSchema = new mongoose.Schema({
+  nomeNota: {
+    type: String,
+    required: true,
+    default: "Adiantamento Funcionário"
+  },
+
   funcionario: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Funcionario",
@@ -13,6 +19,7 @@ const AdiantamentoSchema = new mongoose.Schema({
     required: false
   },
 
+  //Nome Funcionario
   nome: {
     type: String,
     required: false

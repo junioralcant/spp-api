@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 
 const NotaHotelSchema = new mongoose.Schema({
+  nomeNota: {
+    type: String,
+    required: true,
+    default: "Despesa Hotel"
+  },
+
   nome: {
     type: String,
     required: false
@@ -26,7 +32,7 @@ const NotaHotelSchema = new mongoose.Schema({
 
   encarregado: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Encarregado",
+    ref: "Funcionario",
     required: true
   },
 

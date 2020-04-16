@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 
 const NotaRestauranteSchema = new mongoose.Schema({
+  nomeNota: {
+    type: String,
+    required: true,
+    default: "Despesa Restaurante"
+  },
+
   nome: {
     type: String,
     required: true
@@ -19,7 +25,7 @@ const NotaRestauranteSchema = new mongoose.Schema({
 
   encarregado: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Encarregado",
+    ref: "Funcionario",
     required: true
   },
 

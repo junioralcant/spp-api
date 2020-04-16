@@ -10,6 +10,10 @@ class AdiantamentoController {
       filters.nome = new RegExp(req.query.nome_funcionario, "i");
     }
 
+    if (req.query.nome_nota) {
+      filters.nomeNota = new RegExp(req.query.nome_nota, "i");
+    }
+
     if (req.query.data_min || req.query.data_max) {
       filters.data = {};
 
